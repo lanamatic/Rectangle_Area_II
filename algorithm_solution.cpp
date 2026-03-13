@@ -120,7 +120,7 @@ void SweepLineAlgorithm::precomputeStates()
     s.activeHeight = 0;
     s.stripArea = 0;
     s.totalArea = 0;
-    s.totalAreaMod = totalArea % (int)(1e9 + 7);
+    s.totalAreaMod = totalArea % (int)MOD;
     s.isCompute = false;
 
     std::ostringstream oss;
@@ -145,7 +145,7 @@ void SweepLineAlgorithm::precomputeStates()
                 if (cnt[i] > 0)
                     activeH += (long long)(yVals[i + 1] - yVals[i]);
 
-            long long stripA = width * activeH;
+            long long stripA = (width% (int)MOD) * (activeH % (int)MOD) % (int)MOD;
             totalArea += stripA; // Total Area for now
 
             AlgorithmState s;
@@ -156,15 +156,15 @@ void SweepLineAlgorithm::precomputeStates()
             s.activeHeight = activeH;
             s.stripArea = stripA;
             s.totalArea = totalArea;
-            s.totalAreaMod = totalArea % (int)(1e9 + 7);
+            s.totalAreaMod = totalArea % (int)MOD;
             s.isCompute = true;
 
             std::ostringstream oss;
             oss << "Strip [" << curX << ", " << e.x << "): "
                 << "width=" << width << ", active height=" << activeH
-                << "\nStrip Area: " << width << " × " << activeH
-                << " = " << stripA
-                << "\nTotal Area for now: " << totalArea;
+                << "\nStrip Area: " << width  << " × " << activeH
+                << " = " << stripA << " mod (1e9 + 7)"
+                << "\nTotal Area for now: " << totalArea % (int)MOD << " mod (1e9 + 7)";
             s.description = oss.str();
 
             states.push_back(s);
@@ -194,7 +194,7 @@ void SweepLineAlgorithm::precomputeStates()
         s.activeHeight = activeH;
         s.stripArea = 0;
         s.totalArea = totalArea;
-        s.totalAreaMod = totalArea % (int)(1e9 + 7);
+        s.totalAreaMod = totalArea % (int)MOD;
         s.isCompute = false;
 
         std::ostringstream oss;
@@ -219,11 +219,11 @@ void SweepLineAlgorithm::precomputeStates()
         s.activeHeight = 0;
         s.stripArea = 0;
         s.totalArea = totalArea;
-        s.totalAreaMod = totalArea % (int)(1e9 + 7);
+        s.totalAreaMod = totalArea % (int)MOD;
         s.isCompute = false;
 
         std::ostringstream oss;
-        oss << "DONE! Total area = " << totalArea;
+        oss << "DONE! Total area = " << totalArea % (int)MOD << " mod (1e9 + 7)";
         s.description = oss.str();
 
         states.push_back(s);
