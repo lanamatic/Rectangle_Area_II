@@ -51,7 +51,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(Rectangle_Area_II PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Rectangle_Area_II PRIVATE algorithm_lib Qt${QT_VERSION_MAJOR}::Widgets)
 
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

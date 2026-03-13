@@ -17,6 +17,20 @@ struct Event {
     }
 };
 
+// Algorithm state for visualisation
+struct AlgorithmState {
+    int eventIndex;             // which event (-1 = starting index)
+    int sweepX;                 // X position  of sweep line
+    int prevX;                  // last X position for strip visualisation
+    std::vector<int> cnt;       // cnt[i] number of rectangles covering of the segment i
+    long long activeHeight;     // active height in the strip [prevX, sweepX)
+    long long stripArea;        // area of the strip  = width * activeHeight
+    long long totalArea;
+    long long totalAreaMod;
+    std::string description;
+    bool isCompute;
+};
+
 
 class SweepLineAlgorithm {
 public:
@@ -29,6 +43,12 @@ public:
 
 
     std::vector<Event> events;
+    std::vector<AlgorithmState> states; // States for visualisation
+
+    // World borders for visualisation
+    int wxMin = 0, wxMax = 0, wyMin = 0, wyMax = 0;
+
+    long long totalArea = 0;
 
     void solve(const std::vector<std::vector<int>>& rects);
 
@@ -40,6 +60,8 @@ public:
 private:
     void compressCoordinates();
     void createEvents();
+    void computeWorldBounds();
+    void precomputeStates();
 };
 
 #endif // ALGORITHM_SOLUTION_H
