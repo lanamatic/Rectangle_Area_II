@@ -81,3 +81,15 @@ CMakeLists.txt.user*
 
 
 .DS_Store
+
+# LaTeX 
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.sh§
